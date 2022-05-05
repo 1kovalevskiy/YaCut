@@ -129,3 +129,10 @@ dmypy.json
 .pyre/
 
 .vscode
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/shelf/Uncommitted_changes_before_Update_at_05_05_2022,_22_04_[Changes]/shelved.patch
+/.idea/shelf/Uncommitted_changes_before_Update_at_05_05_2022__22_04__Changes_.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
+/.idea/yacut.iml
