@@ -11,6 +11,8 @@ FIELD_DICT = {
 }
 
 
+# tests/conftest.py:23: in <module>
+#     raise AssertionError('В файле models не найдена модель URL_map')
 class URL_map(db.Model):
     __tablename__ = 'URL_map'
     id = db.Column(db.Integer, primary_key=True)
