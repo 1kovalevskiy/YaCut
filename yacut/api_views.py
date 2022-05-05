@@ -4,7 +4,7 @@ from flask import jsonify, request
 
 from yacut import app, db
 from yacut.error_handlers import InvalidAPIUsage
-from yacut.models import UrlMap
+from yacut.models import URL_map
 from yacut.utils import (generate_new_short, get_map_by_short_id,
                          check_short_id_correct, check_short_id_exist)
 
@@ -36,7 +36,7 @@ def add_short():
         raise InvalidAPIUsage('\"url\" является обязательным полем!')
     if check_short_id_exist(short_data):
         raise InvalidAPIUsage(f'Имя "{short_data}" уже занято.')
-    url_map = UrlMap()
+    url_map = URL_map()
     url_map.from_dict(data)
     db.session.add(url_map)
     db.session.commit()

@@ -2,7 +2,7 @@ from flask import render_template, flash, abort, redirect
 
 from yacut import app, db
 from yacut.forms import LinkForm
-from yacut.models import UrlMap
+from yacut.models import URL_map
 from yacut.utils import (generate_new_short, get_map_by_full_url,
                          get_map_by_short_id, check_short_id_exist)
 
@@ -21,7 +21,7 @@ def index_view():
             return render_template('index.html', form=form)
         if form.custom_id.data == '' or form.custom_id.data is None:
             form.custom_id.data = generate_new_short()
-        url_map = UrlMap(
+        url_map = URL_map(
             original=form.original_link.data,
             short=form.custom_id.data
         )
