@@ -1,10 +1,12 @@
+import http
+
 from flask import render_template, jsonify
 
 from yacut import app, db
 
 
 class InvalidAPIUsage(Exception):
-    status_code = 400
+    status_code = http.HTTPStatus.BAD_REQUEST
 
     def __init__(self, message, status_code=None):
         super().__init__()
@@ -23,10 +25,10 @@ def invalid_api_usage(error):
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('404.html'), 404
+    return render_template('404.html'), http.HTTPStatus.NOT_FOUND
 
 
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
-    return render_template('500.html'), 500
+    return render_template('500.html'), http.HTTPStatus.INTERNAL_SERVER_ERROR

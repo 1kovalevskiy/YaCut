@@ -2,7 +2,7 @@ from flask import render_template, flash, abort, redirect
 
 from yacut import app, db
 from yacut.forms import LinkForm
-from yacut.models import URL_map
+from yacut.models import UrlMap
 from yacut.utils import (generate_new_short, get_map_by_full_url,
                          get_map_by_short_id, check_short_id_exist)
 
@@ -21,7 +21,7 @@ def index_view():
             return render_template('index.html', form=form)
         if form.custom_id.data == '' or form.custom_id.data is None:
             form.custom_id.data = generate_new_short()
-        url_map = URL_map(
+        url_map = UrlMap(
             original=form.original_link.data,
             short=form.custom_id.data
         )
@@ -33,11 +33,6 @@ def index_view():
 
 @app.route('/<string:custom_id>')
 def open_external_page(custom_id):
-    # Очень жалко, что в тесте подсовывается короткий адрес "unexpected"
-    # Ведь есть ограничение в 6 символов и я бы этот адрес выкинул с 400
-    # А здесь тесты требуют 404, хотя стоит пользователю дать понять, что не так
-    # if not check_short_id_correct(custom_id):
-    #     abort(400)
     url_map = get_map_by_short_id(custom_id)
     if url_map is None:
         abort(404)
