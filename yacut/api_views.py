@@ -18,7 +18,7 @@ def get_full_link(custom_id):
             status_code=http.HTTPStatus.NOT_FOUND
         )
     data = url_map.to_dict()
-    return jsonify(url=data.get("url")), 200
+    return jsonify(url=data.get("url")), http.HTTPStatus.OK
 
 
 @app.route('/api/id/', methods=['POST'])

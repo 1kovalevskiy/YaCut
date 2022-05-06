@@ -1,3 +1,5 @@
+import http
+
 from flask import render_template, flash, abort, redirect
 
 from yacut import app, db
@@ -35,5 +37,5 @@ def index_view():
 def open_external_page(custom_id):
     url_map = get_map_by_short_id(custom_id)
     if url_map is None:
-        abort(404)
-    return redirect(f"{url_map.original}", code=302)
+        abort(http.HTTPStatus.NOT_FOUND)
+    return redirect(f"{url_map.original}", code=http.HTTPStatus.FOUND)
